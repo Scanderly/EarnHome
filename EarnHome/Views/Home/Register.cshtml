@@ -1,0 +1,69 @@
+﻿@{
+    Layout = null;
+}
+<h2>Register</h2>
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Nago - Admin & Dashboard HTML Template</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="~/Public/assets/media/image/favicon.png" />
+
+    <!-- Plugin styles -->
+    <link rel="stylesheet" href="~/Public/vendors/bundle.css" type="text/css">
+
+    <!-- App styles -->
+    <link rel="stylesheet" href="~/Public/assets/css/app.min.css" type="text/css">
+</head>
+<body class="form-membership">
+
+    <!-- begin::preloader-->
+    <div class="preloader">
+        <div class="preloader-icon"></div>
+    </div>
+    <!-- end::preloader -->
+
+    <div class="form-wrapper">
+
+
+        <!-- logo -->
+        <div id="logo">
+            <img class="logo" src="~/Public/assets/media/image/logo.png" alt="image">
+            <img class="logo-dark" src="~/Public/assets/media/image/logo-dark.html" alt="image">
+        </div>
+        <!-- ./ logo -->
+
+        <h5>Create account</h5>
+
+        <!-- form -->
+        <form action="@Url.Action("register","home",new {Area="" })" method="post">
+            <div class="form-group">
+                <input type="text" class="form-control" name="Fullname" placeholder="Fullname" required>
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-control" name="Email"  placeholder="Email" required>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="Password" placeholder="Password" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Qeydiyyatdan keç</button>
+        </form>
+        <!-- ./ form -->
+
+
+    </div>
+
+    <!-- Plugin scripts -->
+    <script src="~/Public/vendors/bundle.js"></script>
+
+    <!-- App scripts -->
+    <script src="~/Public/assets/js/app.min.js"></script>
+</body>
+
+</html>

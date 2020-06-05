@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6ff054a63f44427587c10688cf2ab75d" Name="Diagram1">
+        <EntityTypeShape EntityType="EarnHomeModel.Category" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EarnHomeModel.Comment" Width="1.5" PointX="7.5" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EarnHomeModel.UserSkill" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <AssociationConnector Association="EarnHomeModel.FK_UserSkills_Categories" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="EarnHomeModel.User" Width="1.5" PointX="5.25" PointY="6.875" />
+        <AssociationConnector Association="EarnHomeModel.FK_Comments_Users" />
+        <AssociationConnector Association="EarnHomeModel.FK_Users_UserSkills" />
+        <EntityTypeShape EntityType="EarnHomeModel.Post" Width="1.5" PointX="3" PointY="1.875" />
+        <AssociationConnector Association="EarnHomeModel.FK_Posts_Categories" />
+        <EntityTypeShape EntityType="EarnHomeModel.Notification" Width="1.5" PointX="7.5" PointY="10.5" />
+        <AssociationConnector Association="EarnHomeModel.FK_Notifications_Users" />
+        <EntityTypeShape EntityType="EarnHomeModel.Message" Width="1.5" PointX="7.5" PointY="13.5" />
+        <AssociationConnector Association="EarnHomeModel.FK_Messages_Users" />
+        <EntityTypeShape EntityType="EarnHomeModel.Order" Width="1.5" PointX="7.5" PointY="2.375" />
+        <AssociationConnector Association="EarnHomeModel.FK_Orders_Categories" />
+        <AssociationConnector Association="EarnHomeModel.FK_Orders_Posts" />
+        <AssociationConnector Association="EarnHomeModel.FK_Orders_Users" />
+        <AssociationConnector Association="EarnHomeModel.FK_Orders_Users1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
