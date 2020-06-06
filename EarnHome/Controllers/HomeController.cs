@@ -17,12 +17,6 @@ namespace EarnHome.Controllers
             return View();
         }
 
-        public ActionResult Homepage()
-        {
-            IEnumerable<Post> post = db.Posts;
-            ViewBag.Posts = post;
-            return View();
-        } 
         //public ActionResult HashPassword()
         //{
         //    return Content(Crypto.HashPassword("10041989"));
@@ -52,7 +46,7 @@ namespace EarnHome.Controllers
                 }
 
             }
-            return RedirectToAction("homepage","home",new {Area="" });
+            return RedirectToAction("index","post",new {Area="" });
         }
         public ActionResult Register()
         {
@@ -85,7 +79,7 @@ namespace EarnHome.Controllers
         {
             Session["Login"] = false;
             Session["User"] = null;
-            return RedirectToAction("homepage", "home", new { Area = "" });
+            return RedirectToAction("index", "post", new { Area = "" });
 
         }
     }
