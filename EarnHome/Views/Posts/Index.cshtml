@@ -1,6 +1,8 @@
 ﻿@model IEnumerable<EarnHome.Models.Post>
+@using EarnHome.Models
 
 @{
+    User user=Session["User"] as User;
     ViewBag.Title = "Index";
 }
 
@@ -9,9 +11,9 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href=index-2.html>E-commerce</a>
+                    <a href=index-2.html>Evden qazan</a>
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                <li class="breadcrumb-item active" aria-current="page">Ana səhifə</li>
             </ol>
         </nav>
     </div>
@@ -24,7 +26,13 @@
                     <h4 class="mb-5">
                         Son Elanlar
                     </h4>
-                    <a href="@Url.Action("create","post", new {Area="" })" class="btn btn-dribbble">Elan yerləşdir</a>
+                    @if (user != null)
+                    {
+                        <a href="@Url.Action("create", "posts", new { Area = "" })" class="newlog btn btn-info">Elan yerləşdir</a>
+                    }
+                    else {
+                        <a href="@Url.Action("index","home",new{Area="" })" class="newlog btn btn-info">Elan yerləşdir</a>
+                    }
                     <div>
                         <div>
                             <ul class="list-group list-group-flush">
@@ -42,13 +50,22 @@
                                             <div class="text-muted font-size-13">
                                                 <ul class="list-inline">
                                                     <li class="list-inline-item">
-                                                        <span class="badge badge-secondary">@item.UserId</span>
+                                                        <span class="badge badge-soft-info">@item.Category.Name</span>
                                                     </li>
-                                                    <li class="list-inline-item">@item.Category.Name</li>
+                                                    <li class="list-inline-item">@item.User.Fullname</li>
                                                 </ul>
                                             </div>
+                                            <div>
+                                                <span><i class="fas fa-thumbs-up badge-primary">@item.Likes</i>dəfə bəyənilib</span>
+                                            </div>
+                                            @if (user.Id == item.UserId)
+                                            {
+                                                <div>
+                                                    <a href="@Url.Action("edit","posts", new { Area = "",id=item.Id })"><i class="fas fa-edit"></i>Dəyiş</a>
+                                                </div>
+                                            }
                                         </li>
-
+                                        
                                     }
 
                                 }
@@ -59,7 +76,7 @@
                             </ul>
                         </div>
                     </div>
-
+                 
 
 
                     <nav class="mt-3">

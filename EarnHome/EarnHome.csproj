@@ -139,6 +139,7 @@
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\PostsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Filters\Auth.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -207,6 +208,7 @@
     <Content Include="Areas\Executer\Views\web.config" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Public\css\bootstrap.min.css" />
+    <Content Include="Public\css\custom.css" />
     <Content Include="Public\css\icons.min.css" />
     <Content Include="Public\css\theme.min.css" />
     <Content Include="Public\fonts\boxicons-2.html" />

@@ -12,17 +12,18 @@
         <EntityTypeShape EntityType="EarnHomeModel.User" Width="1.5" PointX="5.25" PointY="6.875" />
         <AssociationConnector Association="EarnHomeModel.FK_Comments_Users" />
         <AssociationConnector Association="EarnHomeModel.FK_Users_UserSkills" />
-        <EntityTypeShape EntityType="EarnHomeModel.Post" Width="1.5" PointX="3" PointY="1.875" />
-        <AssociationConnector Association="EarnHomeModel.FK_Posts_Categories" />
         <EntityTypeShape EntityType="EarnHomeModel.Notification" Width="1.5" PointX="7.5" PointY="10.5" />
         <AssociationConnector Association="EarnHomeModel.FK_Notifications_Users" />
         <EntityTypeShape EntityType="EarnHomeModel.Message" Width="1.5" PointX="7.5" PointY="13.5" />
         <AssociationConnector Association="EarnHomeModel.FK_Messages_Users" />
         <EntityTypeShape EntityType="EarnHomeModel.Order" Width="1.5" PointX="7.5" PointY="2.375" />
         <AssociationConnector Association="EarnHomeModel.FK_Orders_Categories" />
-        <AssociationConnector Association="EarnHomeModel.FK_Orders_Posts" />
         <AssociationConnector Association="EarnHomeModel.FK_Orders_Users" />
         <AssociationConnector Association="EarnHomeModel.FK_Orders_Users1" />
+        <EntityTypeShape EntityType="EarnHomeModel.Post" Width="1.5" PointX="10.5" PointY="5.625" />
+        <AssociationConnector Association="EarnHomeModel.FK_Posts_Categories" />
+        <AssociationConnector Association="EarnHomeModel.FK_Orders_Posts" />
+        <AssociationConnector Association="EarnHomeModel.FK_Posts_Users" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

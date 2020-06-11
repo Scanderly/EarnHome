@@ -25,8 +25,8 @@ namespace EarnHome.Models
         public string Desc { get; set; }
     
         public virtual Category Category { get; set; }
-        public virtual Post Post { get; set; }
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
+        public virtual Post Post { get; set; }
     }
 }

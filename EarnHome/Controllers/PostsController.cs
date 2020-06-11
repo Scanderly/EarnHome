@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using EarnHome.Filters;
 using EarnHome.Models;
 
 namespace EarnHome.Controllers
@@ -17,7 +18,9 @@ namespace EarnHome.Controllers
         // GET: Posts
         public ActionResult Index()
         {
+            
             var posts = db.Posts.Include(p => p.Category);
+            
             return View(posts.ToList());
         }
 
@@ -37,9 +40,11 @@ namespace EarnHome.Controllers
         }
 
         // GET: Posts/Create
+        [Auth]
         public ActionResult Create()
         {
             ViewBag.CategorId = new SelectList(db.Categories, "Id", "Name");
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Name");
             return View();
         }
 
@@ -48,15 +53,27 @@ namespace EarnHome.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Header,Desc,Text,UserId,Likes,CategorId")] Post post)
+        [Auth]
+        
+        public ActionResult Create([Bind(Include = "Id,Header,UserId, Desc,Text,CategorId")] Post post)
         {
+         
             if (ModelState.IsValid)
             {
-                db.Posts.Add(post);
+                Post newpost = new Post();
+                User user = Session["User"] as User;
+                newpost.Header = post.Header;
+                newpost.Id = post.Id;
+                newpost.Text = post.Text;
+                newpost.CategorId = post.CategorId;
+                newpost.UserId = user.Id;
+                db.Posts.Add(newpost);
+
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }
 
+            }
             ViewBag.CategorId = new SelectList(db.Categories, "Id", "Name", post.CategorId);
             return View(post);
         }
@@ -82,10 +99,18 @@ namespace EarnHome.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Header,Desc,Text,UserId,Likes,CategorId")] Post post)
+        public ActionResult Edit([Bind(Include = "Id,Header,Desc,Text,Likes,CategorId")] Post post)
         {
+            
             if (ModelState.IsValid)
             {
+                Post newpost = new Post();
+                User user = Session["User"] as User;
+                newpost.Header = post.Header;
+                newpost.Id = post.Id;
+                newpost.Text = post.Text;
+                newpost.CategorId = post.CategorId;
+                newpost.UserId = user.Id;
                 db.Entry(post).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

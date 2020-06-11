@@ -20,6 +20,17 @@ namespace EarnHome.Controllers
             var orders = db.Orders.Include(o => o.Category).Include(o => o.User).Include(o => o.User1).Include(o => o.Post);
             return View(orders.ToList());
         }
+        public JsonResult index()
+        {
+            Order order = new Order();
+
+            return Json(
+                new
+                {
+
+                }, JsonRequestBehavior.AllowGet
+                );
+        }
 
         // GET: Orders/Details/5
         public ActionResult Details(int? id)

@@ -185,6 +185,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Posts_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Posts" Type="Self.Posts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Posts">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Users_UserSkills">
           <End Role="UserSkills" Type="Self.UserSkills" Multiplicity="0..1" />
           <End Role="Users" Type="Self.Users" Multiplicity="*" />
@@ -250,6 +262,10 @@
             <End Role="Categories" EntitySet="Categories" />
             <End Role="Posts" EntitySet="Posts" />
           </AssociationSet>
+          <AssociationSet Name="FK_Posts_Users" Association="Self.FK_Posts_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Posts" EntitySet="Posts" />
+          </AssociationSet>
           <AssociationSet Name="FK_Users_UserSkills" Association="Self.FK_Users_UserSkills">
             <End Role="UserSkills" EntitySet="UserSkills" />
             <End Role="Users" EntitySet="Users" />
@@ -270,8 +286,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="UserSkills" Relationship="Self.FK_UserSkills_Categories" FromRole="Categories" ToRole="UserSkills" />
-          <NavigationProperty Name="Posts" Relationship="EarnHomeModel.FK_Posts_Categories" FromRole="Category" ToRole="Post" />
           <NavigationProperty Name="Orders" Relationship="EarnHomeModel.FK_Orders_Categories" FromRole="Category" ToRole="Order" />
+          <NavigationProperty Name="Posts" Relationship="EarnHomeModel.FK_Posts_Categories" FromRole="Category" ToRole="Post" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
@@ -323,11 +339,6 @@
             <End Role="UserSkill" EntitySet="UserSkills" />
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
-          <EntitySet Name="Posts" EntityType="EarnHomeModel.Post" />
-          <AssociationSet Name="FK_Posts_Categories" Association="EarnHomeModel.FK_Posts_Categories">
-            <End Role="Category" EntitySet="Categories" />
-            <End Role="Post" EntitySet="Posts" />
-          </AssociationSet>
           <EntitySet Name="Notifications" EntityType="EarnHomeModel.Notification" />
           <AssociationSet Name="FK_Notifications_Users" Association="EarnHomeModel.FK_Notifications_Users">
             <End Role="User" EntitySet="Users" />
@@ -343,10 +354,6 @@
             <End Role="Category" EntitySet="Categories" />
             <End Role="Order" EntitySet="Orders" />
           </AssociationSet>
-          <AssociationSet Name="FK_Orders_Posts" Association="EarnHomeModel.FK_Orders_Posts">
-            <End Role="Post" EntitySet="Posts" />
-            <End Role="Order" EntitySet="Orders" />
-          </AssociationSet>
           <AssociationSet Name="FK_Orders_Users" Association="EarnHomeModel.FK_Orders_Users">
             <End Role="User" EntitySet="Users" />
             <End Role="Order" EntitySet="Orders" />
@@ -354,6 +361,19 @@
           <AssociationSet Name="FK_Orders_Users1" Association="EarnHomeModel.FK_Orders_Users1">
             <End Role="User" EntitySet="Users" />
             <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <EntitySet Name="Posts" EntityType="EarnHomeModel.Post" />
+          <AssociationSet Name="FK_Posts_Categories" Association="EarnHomeModel.FK_Posts_Categories">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Post" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Posts" Association="EarnHomeModel.FK_Orders_Posts">
+            <End Role="Post" EntitySet="Posts" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Posts_Users" Association="EarnHomeModel.FK_Posts_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Post" EntitySet="Posts" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="User">
@@ -373,6 +393,7 @@
           <NavigationProperty Name="Messages" Relationship="EarnHomeModel.FK_Messages_Users" FromRole="User" ToRole="Message" />
           <NavigationProperty Name="Orders" Relationship="EarnHomeModel.FK_Orders_Users" FromRole="User" ToRole="Order" />
           <NavigationProperty Name="Orders1" Relationship="EarnHomeModel.FK_Orders_Users1" FromRole="User" ToRole="Order" />
+          <NavigationProperty Name="Posts" Relationship="EarnHomeModel.FK_Posts_Users" FromRole="User" ToRole="Post" />
         </EntityType>
         <Association Name="FK_Comments_Users">
           <End Type="EarnHomeModel.User" Role="User" Multiplicity="0..1" />
@@ -395,32 +416,6 @@
             </Principal>
             <Dependent Role="User">
               <PropertyRef Name="UserSkillsId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Post">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Header" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Desc" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="Likes" Type="Int32" />
-          <Property Name="CategorId" Type="Int32" />
-          <NavigationProperty Name="Category" Relationship="EarnHomeModel.FK_Posts_Categories" FromRole="Post" ToRole="Category" />
-          <NavigationProperty Name="Orders" Relationship="EarnHomeModel.FK_Orders_Posts" FromRole="Post" ToRole="Order" />
-        </EntityType>
-        <Association Name="FK_Posts_Categories">
-          <End Type="EarnHomeModel.Category" Role="Category" Multiplicity="0..1" />
-          <End Type="EarnHomeModel.Post" Role="Post" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Category">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Post">
-              <PropertyRef Name="CategorId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -485,9 +480,9 @@
           <Property Name="Date" Type="Int32" Nullable="false" />
           <Property Name="Desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Category" Relationship="EarnHomeModel.FK_Orders_Categories" FromRole="Order" ToRole="Category" />
-          <NavigationProperty Name="Post" Relationship="EarnHomeModel.FK_Orders_Posts" FromRole="Order" ToRole="Post" />
           <NavigationProperty Name="User" Relationship="EarnHomeModel.FK_Orders_Users" FromRole="Order" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="EarnHomeModel.FK_Orders_Users1" FromRole="Order" ToRole="User" />
+          <NavigationProperty Name="Post" Relationship="EarnHomeModel.FK_Orders_Posts" FromRole="Order" ToRole="Post" />
         </EntityType>
         <Association Name="FK_Orders_Categories">
           <End Type="EarnHomeModel.Category" Role="Category" Multiplicity="0..1" />
@@ -498,18 +493,6 @@
             </Principal>
             <Dependent Role="Order">
               <PropertyRef Name="CategorId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Orders_Posts">
-          <End Type="EarnHomeModel.Post" Role="Post" Multiplicity="1" />
-          <End Type="EarnHomeModel.Order" Role="Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Post">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="PostId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -534,6 +517,57 @@
             </Principal>
             <Dependent Role="Order">
               <PropertyRef Name="ExecuterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Header" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Desc" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Likes" Type="Int32" />
+          <Property Name="CategorId" Type="Int32" />
+          <NavigationProperty Name="Category" Relationship="EarnHomeModel.FK_Posts_Categories" FromRole="Post" ToRole="Category" />
+          <NavigationProperty Name="Orders" Relationship="EarnHomeModel.FK_Orders_Posts" FromRole="Post" ToRole="Order" />
+          <NavigationProperty Name="User" Relationship="EarnHomeModel.FK_Posts_Users" FromRole="Post" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Posts_Categories">
+          <End Type="EarnHomeModel.Category" Role="Category" Multiplicity="0..1" />
+          <End Type="EarnHomeModel.Post" Role="Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Post">
+              <PropertyRef Name="CategorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Posts">
+          <End Type="EarnHomeModel.Post" Role="Post" Multiplicity="1" />
+          <End Type="EarnHomeModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="PostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Posts_Users">
+          <End Type="EarnHomeModel.User" Role="User" Multiplicity="1" />
+          <End Type="EarnHomeModel.Post" Role="Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Post">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -584,19 +618,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Posts">
-            <EntityTypeMapping TypeName="EarnHomeModel.Post">
-              <MappingFragment StoreEntitySet="Posts">
-                <ScalarProperty Name="CategorId" ColumnName="CategorId" />
-                <ScalarProperty Name="Likes" ColumnName="Likes" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Text" ColumnName="Text" />
-                <ScalarProperty Name="Desc" ColumnName="Desc" />
-                <ScalarProperty Name="Header" ColumnName="Header" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Notifications">
             <EntityTypeMapping TypeName="EarnHomeModel.Notification">
               <MappingFragment StoreEntitySet="Notifications">
@@ -630,6 +651,19 @@
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="PostId" ColumnName="PostId" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Header" ColumnName="Header" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Posts">
+            <EntityTypeMapping TypeName="EarnHomeModel.Post">
+              <MappingFragment StoreEntitySet="Posts">
+                <ScalarProperty Name="CategorId" ColumnName="CategorId" />
+                <ScalarProperty Name="Likes" ColumnName="Likes" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Desc" ColumnName="Desc" />
                 <ScalarProperty Name="Header" ColumnName="Header" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

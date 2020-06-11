@@ -46,7 +46,7 @@ namespace EarnHome.Controllers
                 }
 
             }
-            return RedirectToAction("index","post",new {Area="" });
+            return RedirectToAction("index","posts",new {Area="" });
         }
         public ActionResult Register()
         {
@@ -79,7 +79,7 @@ namespace EarnHome.Controllers
         {
             Session["Login"] = false;
             Session["User"] = null;
-            return RedirectToAction("index", "post", new { Area = "" });
+            return RedirectToAction("index", "posts", new { Area = "" });
 
         }
     }

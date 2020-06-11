@@ -22,6 +22,7 @@ namespace EarnHome.Models
             this.Messages = new HashSet<Message>();
             this.Orders = new HashSet<Order>();
             this.Orders1 = new HashSet<Order>();
+            this.Posts = new HashSet<Post>();
         }
     
         public int Id { get; set; }
@@ -43,5 +44,7 @@ namespace EarnHome.Models
         public virtual ICollection<Order> Orders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Post> Posts { get; set; }
     }
 }
