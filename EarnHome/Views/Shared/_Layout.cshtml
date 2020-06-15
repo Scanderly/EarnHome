@@ -4,6 +4,8 @@
     EarnHomeEntities db = new EarnHomeEntities();
     List<Notification> notification = new List<Notification>();
     List<Message> messages = new List<Message>();
+    List<Category> categories = new List<Category>();
+    categories = db.Categories.OrderByDescending(o => o.Id).ToList();
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -141,7 +143,7 @@
                                 <button type="button" class="btn header-item noti-icon waves-effect waves-light" id="page-header-notifications-dropdown"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="mdi mdi-bell"></i>
-                                    <span class="badge badge-danger badge-pill">@notification.Count</span>
+                                    <span class="badge badge-danger badge-pill note">@notification.Count</span>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0"
                                      aria-labelledby="page-header-notifications-dropdown">
@@ -241,43 +243,49 @@
                             <ul class="navbar-nav">
                                 <li class="nav-item">
                                     <a class="nav-link" href="@Url.Action("index","posts", new {Area="" })">
-                                        <i class="bx bx-home-smile"></i>Ana Səhifə
+                                        <i class="bx bx-home-smile navicon"></i>Ana Səhifə
                                     </a>
                                 </li>
 
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-components" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="bx bx-folder-plus"></i>Sifarişlər<div class="arrow-down"></div>
+                                        <i class="bx bx-folder-plus navicon"></i>Sifarişlər<div class="arrow-down"></div>
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="topnav-components">
-                                        <a href="ui-buttons.html" class="dropdown-item">Proqramlaşdırma</a>
-                                        <a href="ui-cards.html" class="dropdown-item">Dizayn</a>
-                                        <a href="ui-carousel.html" class="dropdown-item">Tərcümə</a>
-                                        <a href="ui-embeds.html" class="dropdown-item">Hüquq</a>
-                                        <a href="ui-general.html" class="dropdown-item">Kopiraytinq</a>
-                                        <a href="ui-grid.html" class="dropdown-item">Kargüzarlıq</a>
-                                        <a href="ui-media-objects.html" class="dropdown-item">Dərzilik</a>
-                                        <a href="ui-modals.html" class="dropdown-item">Model</a>
-                                        <a href="ui-progressbars.html" class="dropdown-item">Fotoqraf</a>
-                                        <a href="ui-tabs.html" class="dropdown-item">Əl İşləri</a>
+                                        @foreach (var item in categories)
+                                        {
+                                            <a href="@Url.Action("index","orders",new {id=item.Id })" class="dropdown-item"><i class="@item.Icon submenu"></i>@item.Name</a>
+
+                                        }
+
+                                        @*<a href="ui-cards.html" class="dropdown-item"><i class="fas fa-palette submenu"></i>Dizayn</a>
+                                            <a href="ui-carousel.html" class="dropdown-item"><i class="fas fa-language submenu"></i>Tərcümə</a>
+                                            <a href="ui-embeds.html" class="dropdown-item"><i class="fas fa-gavel submenu"></i>Hüquq</a>
+                                            <a href="ui-general.html" class="dropdown-item"><i class="fas fa-trademark submenu"></i>Kopiraytinq</a>
+                                            <a href="ui-grid.html" class="dropdown-item"><i class="fas fa-print submenu"></i>Kargüzarlıq</a>
+                                            <a href="ui-media-objects.html" class="dropdown-item"><i class="fas fa-democrat submenu"></i>Dərzilik</a>
+                                            <a href="ui-modals.html" class="dropdown-item"><i class="fas fa-female submenu"></i>Model</a>
+                                            <a href="ui-progressbars.html" class="dropdown-item"><i class="fas fa-camera submenu"></i>Fotoqraf</a>
+                                            <a href="ui-tabs.html" class="dropdown-item"><i class="fas fa-hand-holding-heart submenu"></i>Əl İşləri</a>
+                                            <a href="ui-tabs.html" class="dropdown-item"><i class="fas fa-hammer submenu"></i>Təmir</a>*@
                                     </div>
                                 </li>
 
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle arrow-none" href="" id="topnav-pages" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="bx bx-user"></i>İstifadəçilər<div class="arrow-down"></div>
+                                        <i class="bx bx-user navicon"></i>İstifadəçilər<div class="arrow-down"></div>
                                     </a>
-                                   
+
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-forms" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="bx bxs-book-content"></i>Haqqımızda<div class="arrow-down"></div>
+                                        <i class="bx bxs-book-content navicon"></i>Haqqımızda<div class="arrow-down"></div>
                                     </a>
                                 </li>
 
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-charts" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="bx bxs-hand-right"></i>Partnyorlarımız <div class="arrow-down"></div>
+                                        <i class="bx bxs-hand-right navicon"></i>Partnyorlarımız <div class="arrow-down"></div>
                                     </a>
                             </ul>
                         </div>
@@ -288,7 +296,7 @@
             <div class="page-content">
                 <div class="container-fluid">
                     <!-- start page title -->
-                   @RenderBody();
+                    @RenderBody();
                     <!-- end page title -->
 
 
@@ -323,7 +331,7 @@
     <script src="~/Public/js/bootstrap.bundle.min.js"></script>
     <script src="~/Public/js/waves.js"></script>
     <script src="~/Public/js/simplebar.min.js"></script>
-
+    <script src="~/Public/js/customs.js"></script>
     <!-- App js -->
     <script src="~/Public/js/theme.js"></script>
 

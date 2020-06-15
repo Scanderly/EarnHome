@@ -3,3 +3,23 @@
     top: 50px;
     right: 119px;
 }
+.likes {
+    color: #9717e7;
+}
+.navicon {
+    color: #c41375a1;
+    font-weight: 1000;
+}
+.submenu{
+    color:antiquewhite
+}
+.fas fa-trash-alt{
+    color:red;
+}
+.orderitems {
+    position: absolute;
+    left: 361px;
+}
+.orderimg {
+    max-width:100%;
+}

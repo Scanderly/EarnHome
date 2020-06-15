@@ -132,9 +132,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
-    <Compile Include="Areas\Client\ClientAreaRegistration.cs" />
     <Compile Include="Areas\Executer\Controllers\ProfileController.cs" />
     <Compile Include="Areas\Executer\ExecuterAreaRegistration.cs" />
+    <Compile Include="Areas\Models\Info.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\PostsController.cs" />
@@ -204,7 +204,6 @@
     <Content Include="Models\Database.edmx.diagram">
       <DependentUpon>Database.edmx</DependentUpon>
     </Content>
-    <Content Include="Areas\Client\Views\web.config" />
     <Content Include="Areas\Executer\Views\web.config" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Public\css\bootstrap.min.css" />
@@ -261,6 +260,7 @@
     <Content Include="Public\images\users\avatar-8.jpg" />
     <Content Include="Public\images\users\nophoto.jpg" />
     <Content Include="Public\js\bootstrap.bundle.min.js" />
+    <Content Include="Public\js\customs.js" />
     <Content Include="Public\js\jquery.min.js" />
     <Content Include="Public\js\metismenu.min.js" />
     <Content Include="Public\js\simplebar.min.js" />
@@ -299,11 +299,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Client\Controllers\" />
-    <Folder Include="Areas\Client\Data\" />
-    <Folder Include="Areas\Client\Views\Shared\" />
     <Folder Include="Areas\Executer\Data\" />
-    <Folder Include="Areas\Models\" />
     <Folder Include="Upload\" />
   </ItemGroup>
   <ItemGroup>
@@ -313,7 +309,6 @@
     <Content Include="Areas\Admin\Views\Admin\Index.cshtml" />
     <Content Include="Areas\Executer\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Executer\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Executer\Views\Profile\Create.cshtml" />
     <Content Include="Areas\Executer\Views\Profile\Delete.cshtml" />
     <Content Include="Areas\Executer\Views\Profile\Details.cshtml" />
     <Content Include="Areas\Executer\Views\Profile\Edit.cshtml" />

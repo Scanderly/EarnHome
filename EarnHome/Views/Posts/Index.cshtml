@@ -30,7 +30,8 @@
                     {
                         <a href="@Url.Action("create", "posts", new { Area = "" })" class="newlog btn btn-info">Elan yerləşdir</a>
                     }
-                    else {
+                    else
+                    {
                         <a href="@Url.Action("index","home",new{Area="" })" class="newlog btn btn-info">Elan yerləşdir</a>
                     }
                     <div>
@@ -42,30 +43,33 @@
                                     {
                                         <li class="list-group-item p-l-0 p-r-0">
                                             <h5>
-                                                <a href="#">@item.Header</a>
+                                                <a href="#" data-header="@item.Header">@item.Header</a>
                                             </h5>
-                                            <p class="text-muted">
+                                            <p class="text-muted" dara-text="@item.Text">
                                                 @item.Text
                                             </p>
                                             <div class="text-muted font-size-13">
                                                 <ul class="list-inline">
                                                     <li class="list-inline-item">
-                                                        <span class="badge badge-soft-info">@item.Category.Name</span>
+                                                        <span class="badge badge-soft-info" data-category="@item.Category">@item.Category.Name</span>
                                                     </li>
                                                     <li class="list-inline-item">@item.User.Fullname</li>
+                                                    <li class="list-inline-item badge-primary" data-date="@item.Date">@item.Date</li>
                                                 </ul>
                                             </div>
                                             <div>
-                                                <span><i class="fas fa-thumbs-up badge-primary">@item.Likes</i>dəfə bəyənilib</span>
+                                                <span><i class="fas fa-thumbs-up likes"></i>@item.Likes dəfə bəyənilib</span>
                                             </div>
                                             @if (user.Id == item.UserId)
                                             {
                                                 <div>
-                                                    <a href="@Url.Action("edit","posts", new { Area = "",id=item.Id })"><i class="fas fa-edit"></i>Dəyiş</a>
+                                                    <a href="@Url.Action("edit","posts", new { Area = "",id=item.Id, UserId=user.Id })"><i class="fas fa-edit"></i>Dəyiş</a>
+                                                    <a href="@Url.Action("delete","posts",new {Area="" ,id=item.Id, UserId=user.Id})"><i class="fas fa-trash-alt"></i>Sil</a>
                                                 </div>
                                             }
+                                            <a href="#" role="button" class="request btn btn-secondary">Sorğu göndər</a>
                                         </li>
-                                        
+
                                     }
 
                                 }
@@ -76,7 +80,7 @@
                             </ul>
                         </div>
                     </div>
-                 
+
 
 
                     <nav class="mt-3">

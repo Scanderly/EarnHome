@@ -1,75 +1,48 @@
 ﻿@model IEnumerable<EarnHome.Models.Order>
-
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Sifarişlər";
+
 }
 
-<h2>Index</h2>
+<h2>Sifarişlər</h2>
+<div class="row">
+    <div class="col-md-6 col-xl-3 grid-margin stretch-card">
+        <div class="card card-animate">
+            <div class="card-body">
+                <ul class="list-group">
+                    @foreach(var item in ViewBag.Category)
+                    {
+                       <li>
+                         <a href="@Url.Action(item.Name,"orders",new {id=item.Id })">@item.Name</a>
+                       </li>
 
-<div class="col-md-8 orders">
-    <div class="card ">
-        <div class="card-body">
-            <table class="table">
-                <tr>
-                    <th>
-                        Baslıq
-                    </th>
-                    <th>
-                        Status
-                    </th>
-                    <th>
-                        Kateqoritası
-                    </th>
-                    <th>
-                        Təsviri
-                    </th>
-                    <th>
-                        Sifarişçi
-                    </th>
-                    <th>
-                        İcraçı
-                    </th>
-                    <th>
-                        Elan tarixi
-                    </th>
-                    <th></th>
-                </tr>
-
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Post.Header)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Header)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Status)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Category.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.User.Fullname)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.User1.Fullname)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Date)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Sorgu göndər", "orders", new { id = item.Id }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                        </td>
-                    </tr>
-                }
-
-            </table>
-
+                    }
+                    
+                </ul>
+            </div>
         </div>
-    </div>
+    </div><!-- end col -->
+</div>
+<div class="row orderitems">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-6 col-xl-3 grid-margin stretch-card">
+            <!-- Simple card -->
+            <div class="card card-animate">
+                <img class="card-img-top img-fluid orderimg" src="~/Public/images/media/sm-1.jpg" alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="card-title">@item.Header</h4>
+                    <h5 class="card-title">@item.User.Fullname</h5>
+                    <p class="card-text">
+                        @item.Text
+                        <small class="text-muted">@item.Date</small>
+                    </p>
+                    <a href="#" class="btn btn-primary waves-effect waves-light">Button</a>
+                </div>
+            </div>
+        </div><!-- end col -->
+
+    }
 
 </div>
+

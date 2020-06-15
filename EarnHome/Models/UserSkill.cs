@@ -24,8 +24,8 @@ namespace EarnHome.Models
         public string Name { get; set; }
         public Nullable<int> CategorId { get; set; }
     
-        public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User> Users { get; set; }
+        public virtual Category Category { get; set; }
     }
 }

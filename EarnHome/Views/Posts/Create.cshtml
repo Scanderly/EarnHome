@@ -41,18 +41,18 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CategorId, "CategorId", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("CategorId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("CategorId", null, htmlAttributes: new { @class = "form-control"})
                 @Html.ValidationMessageFor(model => model.CategorId, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Əlavə et" class="btn btn-info" />
+                <input type="submit" value="Əlavə et" class="btn btn-info" id="addpost" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Elanlara qayıt", "Index")
+    @Html.ActionLink("Elanlara qayıt", "index")
 </div>

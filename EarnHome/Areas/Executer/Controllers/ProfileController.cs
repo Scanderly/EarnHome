@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using EarnHome.Models;
+using EarnHome.Areas.Models;
 
 namespace EarnHome.Areas.Executer.Controllers
 {
@@ -17,8 +18,7 @@ namespace EarnHome.Areas.Executer.Controllers
         // GET: Executer/Profile
         public ActionResult Index()
         {
-            var users = db.Users.Include(u => u.UserSkill);
-            return View(users.ToList());
+            return View();
         }
 
         // GET: Executer/Profile/Details/5
@@ -36,30 +36,6 @@ namespace EarnHome.Areas.Executer.Controllers
             return View(user);
         }
 
-        // GET: Executer/Profile/Create
-        public ActionResult Create()
-        {
-            ViewBag.UserSkillsId = new SelectList(db.UserSkills, "Id", "Name");
-            return View();
-        }
-
-        // POST: Executer/Profile/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Fullname,IsAdmin,Email,Password,UserSkillsId,Photo")] User user)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Users.Add(user);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.UserSkillsId = new SelectList(db.UserSkills, "Id", "Name", user.UserSkillsId);
-            return View(user);
-        }
 
         // GET: Executer/Profile/Edit/5
         public ActionResult Edit(int? id)

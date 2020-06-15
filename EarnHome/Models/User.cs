@@ -18,11 +18,11 @@ namespace EarnHome.Models
         public User()
         {
             this.Comments = new HashSet<Comment>();
-            this.Notifications = new HashSet<Notification>();
             this.Messages = new HashSet<Message>();
+            this.Notifications = new HashSet<Notification>();
+            this.Posts = new HashSet<Post>();
             this.Orders = new HashSet<Order>();
             this.Orders1 = new HashSet<Order>();
-            this.Posts = new HashSet<Post>();
         }
     
         public int Id { get; set; }
@@ -32,19 +32,20 @@ namespace EarnHome.Models
         public string Password { get; set; }
         public Nullable<int> UserSkillsId { get; set; }
         public string Photo { get; set; }
+        public string Phone { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comment> Comments { get; set; }
-        public virtual UserSkill UserSkill { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Message> Messages { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Notification> Notifications { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Message> Messages { get; set; }
+        public virtual ICollection<Post> Posts { get; set; }
+        public virtual UserSkill UserSkill { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Post> Posts { get; set; }
     }
 }

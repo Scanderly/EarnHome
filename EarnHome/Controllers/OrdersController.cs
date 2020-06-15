@@ -17,20 +17,23 @@ namespace EarnHome.Controllers
         // GET: Orders
         public ActionResult Index()
         {
-            var orders = db.Orders.Include(o => o.Category).Include(o => o.User).Include(o => o.User1).Include(o => o.Post);
+            List<Category> categories = db.Categories.OrderByDescending(c=>c.Id).ToList();
+            ViewBag.Category = categories;
+            var orders = db.Orders.Include(o => o.Category).Include(o => o.User).Include(o => o.User1).Include(o => o.Post).OrderByDescending(o => o.Date);
             return View(orders.ToList());
+           
         }
-        public JsonResult index()
-        {
-            Order order = new Order();
+        //public JsonResult index()
+        //{
+        //    Order order = new Order();
 
-            return Json(
-                new
-                {
+        //    return Json(
+        //        new
+        //        {
 
-                }, JsonRequestBehavior.AllowGet
-                );
-        }
+        //        }, JsonRequestBehavior.AllowGet
+        //        );
+        //}
 
         // GET: Orders/Details/5
         public ActionResult Details(int? id)

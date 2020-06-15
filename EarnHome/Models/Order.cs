@@ -19,14 +19,14 @@ namespace EarnHome.Models
         public bool Status { get; set; }
         public int PostId { get; set; }
         public int UserId { get; set; }
-        public int ExecuterId { get; set; }
+        public Nullable<int> ExecuterId { get; set; }
         public Nullable<int> CategorId { get; set; }
-        public int Date { get; set; }
-        public string Desc { get; set; }
+        public System.DateTime Date { get; set; }
+        public string Text { get; set; }
     
-        public virtual Category Category { get; set; }
+        public virtual Post Post { get; set; }
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
-        public virtual Post Post { get; set; }
+        public virtual Category Category { get; set; }
     }
 }
