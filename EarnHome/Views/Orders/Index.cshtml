@@ -1,7 +1,9 @@
 ﻿@model IEnumerable<EarnHome.Models.Order>
+@using EarnHome.Models
 @{
     ViewBag.Title = "Sifarişlər";
-
+    EarnHomeEntities db = new EarnHomeEntities();
+    User user = Session["User"] as User;
 }
 
 <h2>Sifarişlər</h2>
@@ -10,14 +12,14 @@
         <div class="card card-animate">
             <div class="card-body">
                 <ul class="list-group">
-                    @foreach(var item in ViewBag.Category)
+                    @foreach (var item in ViewBag.Category)
                     {
-                       <li>
-                         <a href="@Url.Action(item.Name,"orders",new {id=item.Id })">@item.Name</a>
-                       </li>
+                        <li>
+                            <a href="@Url.Action("index","orders",new {id=item.Id })">@item.Name</a>
+                        </li>
 
                     }
-                    
+
                 </ul>
             </div>
         </div>
@@ -37,7 +39,30 @@
                         @item.Text
                         <small class="text-muted">@item.Date</small>
                     </p>
-                    <a href="#" class="btn btn-primary waves-effect waves-light">Button</a>
+
+                    @if (user != null)
+                    {
+                        if (ViewBag.Req != null)
+                        {
+                            if (ViewBag.Req.OrderId == item.Id && ViewBag.Req.UserId == user.Id)
+                            {
+                                <a href="javascript:void(0)" role="button" class="btn btn-success"><i class="fas fa-user-check"></i>Sorğu göndərilib</a>
+
+                            }
+                        }
+                        else
+                        {
+                            <a href="#" role="button" id="sendRequest" data-id="@item.Id" class="btn btn-primary waves-effect waves-light">Sorğu göndər</a>
+                        }
+
+
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("index", "home")" role="button" class="btn btn-primary waves-effect waves-light">Sorğu Göndər</a>
+
+                    }
+
                 </div>
             </div>
         </div><!-- end col -->
@@ -45,4 +70,5 @@
     }
 
 </div>
+
 

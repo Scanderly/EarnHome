@@ -12,29 +12,35 @@ namespace EarnHome.Controllers
 {
     public class OrdersController : Controller
     {
-        private EarnHomeEntities db = new EarnHomeEntities();
+        private readonly EarnHomeEntities db = new EarnHomeEntities();
 
         // GET: Orders
-        public ActionResult Index()
+        public ActionResult Index(Category category, int?id)
         {
-            List<Category> categories = db.Categories.OrderByDescending(c=>c.Id).ToList();
+            User user = Session["User"] as User;
+            List<Category> categories = db.Categories.OrderByDescending(c => c.Id).ToList();
             ViewBag.Category = categories;
-            var orders = db.Orders.Include(o => o.Category).Include(o => o.User).Include(o => o.User1).Include(o => o.Post).OrderByDescending(o => o.Date);
-            return View(orders.ToList());
+            Category cat = categories.FirstOrDefault(c => c.Id == category.Id);
+          
+                if (cat == null)
+                {
+                    return View(db.Orders.OrderByDescending(o => o.Date).ToList());
+                }
+                else if (cat.Id == id)
+                {
+                    List<Order> orders = db.Orders.Where(o => o.CategorId == cat.Id).ToList();
+                    return View(orders.ToList());
+                }
+          
+
+            return View();
+
+
+            //var orders = db.Orders.Include(o => o.Category).Include(o => o.User).Include(o => o.User1).Include(o => o.Post).OrderByDescending(o => o.Date);
+            
            
         }
-        //public JsonResult index()
-        //{
-        //    Order order = new Order();
-
-        //    return Json(
-        //        new
-        //        {
-
-        //        }, JsonRequestBehavior.AllowGet
-        //        );
-        //}
-
+       
         // GET: Orders/Details/5
         public ActionResult Details(int? id)
         {
@@ -76,11 +82,13 @@ namespace EarnHome.Controllers
 
             ViewBag.CategorId = new SelectList(db.Categories, "Id", "Name", order.CategorId);
             ViewBag.UserId = new SelectList(db.Users, "Id", "Fullname", order.UserId);
-            ViewBag.ExecuterId = new SelectList(db.Users, "Id", "Fullname", order.ExecuterId);
             ViewBag.PostId = new SelectList(db.Posts, "Id", "Header", order.PostId);
             return View(order);
         }
-
+        public ActionResult SendNote()
+        {
+            return View();
+        }
         // GET: Orders/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -96,7 +104,6 @@ namespace EarnHome.Controllers
             }
             ViewBag.CategorId = new SelectList(db.Categories, "Id", "Name", order.CategorId);
             ViewBag.UserId = new SelectList(db.Users, "Id", "Fullname", order.UserId);
-            ViewBag.ExecuterId = new SelectList(db.Users, "Id", "Fullname", order.ExecuterId);
             ViewBag.PostId = new SelectList(db.Posts, "Id", "Header", order.PostId);
             return View(order);
         }
@@ -116,7 +123,6 @@ namespace EarnHome.Controllers
             }
             ViewBag.CategorId = new SelectList(db.Categories, "Id", "Name", order.CategorId);
             ViewBag.UserId = new SelectList(db.Users, "Id", "Fullname", order.UserId);
-            ViewBag.ExecuterId = new SelectList(db.Users, "Id", "Fullname", order.ExecuterId);
             ViewBag.PostId = new SelectList(db.Posts, "Id", "Header", order.PostId);
             return View(order);
         }

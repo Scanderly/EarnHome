@@ -91,145 +91,7 @@
                                 </a>
                             </div>
                         </div>
-                        @if (user != null)
-                        {
-                            @*Messages*@
-                            <div class="dropdown d-inline-block">
-                                <button type="button" class="btn header-item noti-icon waves-effect waves-light" id="page-header-notifications-dropdown"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="mdi mdi-mail"></i>
-                                    <span class="badge badge-danger badge-pill">@messages.Count</span>
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0"
-                                     aria-labelledby="page-header-notifications-dropdown">
-                                    <div class="p-3">
-                                        <div class="row align-items-center">
-                                            <div class="col">
-                                                <h6 class="m-0">Məsajlar</h6>
-                                            </div>
-                                            <div class="col-auto">
-                                                <a href="#!" class="small">Hamısına bax</a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div data-simplebar style="max-height: 230px;">
-                                        @foreach (var item in messages)
-                                        {
-                                            <a href="#" class="text-reset notification-item">
-                                                <div class="media">
-                                                    <img src="~/Public/images/users/avatar-5.jpg"
-                                                         class="mr-3 rounded-circle avatar-xs" alt="user-pic">
-                                                    <div class="media-body">
-                                                        <h6 class="mt-0 mb-1">@item.User</h6>
-                                                        <p class="font-size-12 mb-1">@item.Text</p>
-                                                        <p class="font-size-11 font-weight-bold mb-0 text-muted">
-                                                            <i class="mdi mdi-clock-outline"></i>@item.Date
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        }
-                                    </div>
-                                    <div class="p-2 border-top">
-                                        <a class="btn btn-sm btn-light btn-block text-center" href="javascript:void(0)">
-                                            <i class="mdi mdi-arrow-down-circle mr-1"></i> Load More..
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            @*Notifications*@
-                            <div class="dropdown d-inline-block">
-                                <button type="button" class="btn header-item noti-icon waves-effect waves-light" id="page-header-notifications-dropdown"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="mdi mdi-bell"></i>
-                                    <span class="badge badge-danger badge-pill note">@notification.Count</span>
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0"
-                                     aria-labelledby="page-header-notifications-dropdown">
-                                    <div class="p-3">
-                                        <div class="row align-items-center">
-                                            <div class="col">
-                                                <h6 class="m-0">Bildirişlər</h6>
-                                            </div>
-                                            <div class="col-auto">
-                                                <a href="#!" class="small">Hamısına bax</a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div data-simplebar style="max-height: 230px;">
-                                        @foreach (var item in notification)
-                                        {
-                                            <a href="#" class="text-reset notification-item">
-                                                <div class="media">
-                                                    <img src="~/Public/images/users/avatar-5.jpg"
-                                                         class="mr-3 rounded-circle avatar-xs" alt="user-pic">
-                                                    <div class="media-body">
-                                                        <h6 class="mt-0 mb-1">@item.User</h6>
-                                                        <p class="font-size-12 mb-1">@item.Text</p>
-                                                        <p class="font-size-11 font-weight-bold mb-0 text-muted">
-                                                            <i class="mdi mdi-clock-outline"></i>@item.Date
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        }
-                                    </div>
-                                    <div class="p-2 border-top">
-                                        <a class="btn btn-sm btn-light btn-block text-center" href="javascript:void(0)">
-                                            <i class="mdi mdi-arrow-down-circle mr-1"></i> Load More..
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            @*User Menu*@
-                            <div class="dropdown d-inline-block ml-2">
-                                <button type="button" class="btn header-item waves-effect waves-light"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    @if (user.IsAdmin == true)
-                                    {
-                                        <img class="rounded-circle header-profile-user" src="~/Public/images/users/Admin (2).jpg"
-                                             alt="Header Avatar">
-                                    }
-                                    else if (user.IsAdmin == false && user.Photo == null)
-                                    {
-                                        <img class="rounded-circle header-profile-user" src="~/Public/images/users/nophoto.jpg"
-                                             alt="Header Avatar">
-                                    }
-                                    else
-                                    {
-                                        <img class="rounded-circle header-profile-user" src="~/Upload/@user.Photo"
-                                             alt="Header Avatar">
-                                    }
-                                    <span class="d-none d-sm-inline-block ml-1">@user.Fullname</span>
-                                    <i class="mdi mdi-chevron-down d-none d-sm-inline-block"></i>
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
-                                        <span>Inbox</span>
-                                        <span>
-                                            <span class="badge badge-pill badge-info">@messages.Count</span>
-                                        </span>
-                                    </a>
-                                    <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
-                                        <span>Profil</span>
-                                        <span>
-                                            <span class="badge badge-pill badge-warning">1</span>
-                                        </span>
-                                    </a>
-                                    <a class="dropdown-item d-flex align-items-center justify-content-between" href="@Url.Action("logout","home")">
-                                        <span>Çıxış</span>
-                                    </a>
-                                </div>
-                            </div>
-
-                        }
-                        else
-                        {
-                            <a href="@Url.Action("index","home", new {Area=""})" class="btn btn-outline-info" role="button">Daxil Ol</a>
-                        }
-
+                        @Html.Partial("~/Views/Shared/_UserPanel.cshtml");
 
                     </div>
                 </div>
@@ -258,16 +120,6 @@
 
                                         }
 
-                                        @*<a href="ui-cards.html" class="dropdown-item"><i class="fas fa-palette submenu"></i>Dizayn</a>
-                                            <a href="ui-carousel.html" class="dropdown-item"><i class="fas fa-language submenu"></i>Tərcümə</a>
-                                            <a href="ui-embeds.html" class="dropdown-item"><i class="fas fa-gavel submenu"></i>Hüquq</a>
-                                            <a href="ui-general.html" class="dropdown-item"><i class="fas fa-trademark submenu"></i>Kopiraytinq</a>
-                                            <a href="ui-grid.html" class="dropdown-item"><i class="fas fa-print submenu"></i>Kargüzarlıq</a>
-                                            <a href="ui-media-objects.html" class="dropdown-item"><i class="fas fa-democrat submenu"></i>Dərzilik</a>
-                                            <a href="ui-modals.html" class="dropdown-item"><i class="fas fa-female submenu"></i>Model</a>
-                                            <a href="ui-progressbars.html" class="dropdown-item"><i class="fas fa-camera submenu"></i>Fotoqraf</a>
-                                            <a href="ui-tabs.html" class="dropdown-item"><i class="fas fa-hand-holding-heart submenu"></i>Əl İşləri</a>
-                                            <a href="ui-tabs.html" class="dropdown-item"><i class="fas fa-hammer submenu"></i>Təmir</a>*@
                                     </div>
                                 </li>
 
@@ -334,6 +186,9 @@
     <script src="~/Public/js/customs.js"></script>
     <!-- App js -->
     <script src="~/Public/js/theme.js"></script>
+    <script src="~/Public/Scripts/jquery.signalR-2.4.1.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script src="~/Public/Scripts/signalR.messageHub.js"></script>
 
 </body>
 

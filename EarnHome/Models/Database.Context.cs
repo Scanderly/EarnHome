@@ -31,7 +31,8 @@ namespace EarnHome.Models
         public virtual DbSet<Message> Messages { get; set; }
         public virtual DbSet<Post> Posts { get; set; }
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<Request> Requests { get; set; }
     }
 }
